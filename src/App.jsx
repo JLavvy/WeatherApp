@@ -19,11 +19,11 @@ useEffect(() => {
   const fetchWeatherData = async () => {
     const apiKey = 'e6d4f8e332f7dbc221e6b2a0e6725f56';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
-    const forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`; // Forecast API URL
+    
 
     try {
       // Make GET request to fetch weather data
-      const [currentWeatherResponse, forecastResponse] = await Promise.all([axios.get(apiUrl), axios.get(forecastApiUrl)]); // Fetch both current weather and forecast data concurrently
+      const [currentWeatherResponse, forecastResponse] = await Promise.all([axios.get(apiUrl)]); 
       // Set weather data state with the response
       setWeatherData(currentWeatherResponse.data);
       // Set searching state to false
@@ -33,8 +33,7 @@ useEffect(() => {
       // Set current day and date
       setCurrentDay(getCurrentDay());
       setCurrentDate(getCurrentDate());
-      // Log forecast data
-      console.log('Forecast Data:', forecastResponse.data);
+      
     } catch (error) {
       // Log error if fetching weather data fails
       console.error('Error fetching weather data:', error);
